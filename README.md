@@ -1,8 +1,8 @@
-# NEXYRA — AI Energy-Waste Auditor & Energy Detective
+﻿# VOLTARIS — AI Energy-Waste Auditor & Energy Detective
 
 > **"Don't just monitor energy. Investigate it. Explain Every Watt."**
 
-Nexyra is an autonomous AI-powered commercial-building energy forensics and audit platform. Unlike traditional energy management dashboards that merely chart kilowatt-hours, Nexyra actively investigates anomalous consumption, distinguishes between legitimate weather-driven demand and genuine waste, generates forensic evidence cards and autopsy timelines, simulates conservation measures with real physics models, and verifies measured savings using the international IPMVP Option C protocol.
+Voltaris is an autonomous AI-powered commercial-building energy forensics and audit platform. Unlike traditional energy management dashboards that merely chart kilowatt-hours, Voltaris actively investigates anomalous consumption, distinguishes between legitimate weather-driven demand and genuine waste, generates forensic evidence cards and autopsy timelines, simulates conservation measures with real physics models, and verifies measured savings using the international IPMVP Option C protocol.
 
 ---
 
@@ -28,7 +28,7 @@ DETECT ──► INVESTIGATE ──► EXPLAIN ──► SIMULATE ──► RECO
   - Python 3.12+ / 3.13
   - FastAPI (60 fully-typed REST endpoints under `/api/v1`)
   - Pydantic v2 (Strict validation and request/response serialization)
-  - PostgreSQL (`nexyra3_db`)
+  - PostgreSQL (`voltaris3_db`)
   - SQLAlchemy 2.0 (Async + Sync engines with `NullPool` connection management)
   - NumPy, Pandas, Scikit-learn
   - Pytest (17/17 automated end-to-end tests passing)
@@ -46,7 +46,7 @@ DETECT ──► INVESTIGATE ──► EXPLAIN ──► SIMULATE ──► RECO
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                          NEXYRA FRONTEND                               │
+│                          VOLTARIS FRONTEND                               │
 │  React + Vite + TypeScript + Tailwind CSS (http://127.0.0.1:5173)     │
 │                                                                        │
 │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐  │
@@ -86,7 +86,7 @@ DETECT ──► INVESTIGATE ──► EXPLAIN ──► SIMULATE ──► RECO
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ SQLAlchemy 2.0 AsyncPool
 ┌───────────────────────────────────▼────────────────────────────────────┐
-│                    POSTGRESQL DATABASE (nexyra3_db)                    │
+│                    POSTGRESQL DATABASE (voltaris3_db)                    │
 │  - organizations, users, buildings, floors, floor_plans, zones         │
 │  - meters, equipment, operating_schedules, tariffs                     │
 │  - energy_readings (4,032 rows), occupancy_readings, weather_readings   │
@@ -100,7 +100,7 @@ DETECT ──► INVESTIGATE ──► EXPLAIN ──► SIMULATE ──► RECO
 ## Key Features & Analytical Capabilities
 
 ### 1. Contextual Expected Energy Baseline
-Rather than naively comparing today vs yesterday, Nexyra calculates an explainable expected baseline for every zone based on:
+Rather than naively comparing today vs yesterday, Voltaris calculates an explainable expected baseline for every zone based on:
 - Time of day (circadian operating cycle)
 - Day of week (weekday vs weekend setback)
 - Outdoor dry-bulb temperature (cooling degree days / heating degree days)
@@ -174,7 +174,7 @@ Deterministic, synthetic dataset calibrated with fixed random seed `42`:
 ### Prerequisites
 - Python 3.12 or 3.13
 - Node.js v18+ and npm
-- PostgreSQL running locally on port 5432 with database `nexyra3_db` (username: `postgres`, password: `postgres`)
+- PostgreSQL running locally on port 5432 with database `voltaris3_db` (username: `postgres`, password: `postgres`)
 
 ### 1. Database Setup & Seeding
 From the `backend` directory:
@@ -224,4 +224,4 @@ Open `http://127.0.0.1:5173/` in your browser.
 ---
 
 ## License & Compliance
-Built for the Nexyra Hackathon. Calibrated to ASHRAE Standard 55 thermal comfort guidelines and EVO IPMVP Option C measurement and verification protocols.
+Built for the Voltaris Hackathon. Calibrated to ASHRAE Standard 55 thermal comfort guidelines and EVO IPMVP Option C measurement and verification protocols.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Building2, ChevronDown, Bell, Plus, Check, X, Trash2, Settings, LogOut, User as UserIcon } from 'lucide-react';
 import type { Building, User } from '../api/client';
 
@@ -244,8 +244,8 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                       : 'NX'}
                   </div>
                   <div className="overflow-hidden min-w-0">
-                    <p className="text-xs font-bold text-slate-900 truncate">{currentUser?.full_name || 'Nexyra User'}</p>
-                    <p className="text-[10px] text-slate-400 truncate">{currentUser?.email || 'admin@nexyra.ai'}</p>
+                    <p className="text-xs font-bold text-slate-900 truncate">{currentUser?.full_name || 'Voltaris User'}</p>
+                    <p className="text-[10px] text-slate-400 truncate">{currentUser?.email || 'admin@voltaris.ai'}</p>
                     <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-100">
                       {currentUser?.role?.replace('_', ' ') || 'Auditor'}
                     </span>
@@ -258,7 +258,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                   </div>
                   <div className="px-2 py-1.5 text-xs text-slate-600 font-mono flex items-center justify-between rounded-lg bg-slate-50">
                     <span>Database:</span>
-                    <span className="text-emerald-700 font-semibold">nexyra3_db</span>
+                    <span className="text-emerald-700 font-semibold">voltaris3_db</span>
                   </div>
                 </div>
 

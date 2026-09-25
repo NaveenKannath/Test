@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { TopHeader } from './components/TopHeader';
 import { DashboardView } from './views/DashboardView';
@@ -59,7 +59,7 @@ export const App: React.FC = () => {
       setError(null);
     } catch (err: any) {
       console.error("Failed to load facility data:", err);
-      setError("Could not reach Nexyra Backend at http://localhost:8000. Please ensure the backend is running.");
+      setError("Could not reach Voltaris Backend at http://localhost:8000. Please ensure the backend is running.");
     }
   };
 
@@ -68,7 +68,7 @@ export const App: React.FC = () => {
     let isMounted = true;
     async function checkAuth() {
       try {
-        const token = localStorage.getItem('nexyra_auth_token');
+        const token = localStorage.getItem('voltaris_auth_token');
         if (token) {
           const user = await api.getMe();
           if (isMounted) {
@@ -77,7 +77,7 @@ export const App: React.FC = () => {
         }
       } catch (err) {
         console.warn('Authentication token invalid or expired:', err);
-        localStorage.removeItem('nexyra_auth_token');
+        localStorage.removeItem('voltaris_auth_token');
       } finally {
         if (isMounted) setAuthChecking(false);
       }
@@ -104,7 +104,7 @@ export const App: React.FC = () => {
         }
       } catch (err) {
         console.error('Failed to list buildings:', err);
-        setError('Could not reach Nexyra Backend at http://localhost:8000. Please ensure the backend is running.');
+        setError('Could not reach Voltaris Backend at http://localhost:8000. Please ensure the backend is running.');
       }
     }
     init();
@@ -186,7 +186,7 @@ export const App: React.FC = () => {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
         <div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mb-3"></div>
-        <p className="text-xs font-semibold text-slate-600 font-mono">Authenticating with PostgreSQL nexyra3_db...</p>
+        <p className="text-xs font-semibold text-slate-600 font-mono">Authenticating with PostgreSQL voltaris3_db...</p>
       </div>
     );
   }
@@ -301,9 +301,9 @@ export const App: React.FC = () => {
         <footer className="border-t border-slate-200 bg-white py-2.5 px-6 text-[11px] text-slate-400 flex items-center justify-between font-mono">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span className="font-semibold text-slate-600">Nexyra v1.0</span>
+            <span className="font-semibold text-slate-600">Voltaris v1.0</span>
             <span>·</span>
-            <span>nexyra3_db</span>
+            <span>voltaris3_db</span>
           </div>
           <div>IPMVP Option C · ASHRAE 55</div>
         </footer>

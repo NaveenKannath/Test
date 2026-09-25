@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+﻿from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
@@ -384,6 +384,6 @@ async def get_non_waste_explanations(building_id: str, db: AsyncSession = Depend
                 "chiller_cop": 3.4
             },
             confidence_score=0.96,
-            explanation="Power rose +45% above nominal spring baseline. However, Nexyra's contextual models confirmed full building occupancy during an ASHRAE Design Day heatwave. Chillers operated within nominal thermodynamic COP, rejecting false-positive alarm."
+            explanation="Power rose +45% above nominal spring baseline. However, Voltaris's contextual models confirmed full building occupancy during an ASHRAE Design Day heatwave. Chillers operated within nominal thermodynamic COP, rejecting false-positive alarm."
         )
     ]

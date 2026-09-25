@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   Bot, 
   Send, 
@@ -27,7 +27,7 @@ export const AIDetectiveView: React.FC<AIDetectiveViewProps> = ({ buildingId, bu
   }>>([
     {
       role: 'assistant',
-      content: `Hello! I am your Nexyra Energy Forensics Detective. I investigate submeter telemetry across ${displayName} to answer 'Why did that watt get spent?'. Ask me about anomalous spikes, after-hours waste, weather impact, or verified savings opportunities.`
+      content: `Hello! I am your Voltaris Energy Forensics Detective. I investigate submeter telemetry across ${displayName} to answer 'Why did that watt get spent?'. Ask me about anomalous spikes, after-hours waste, weather impact, or verified savings opportunities.`
     }
   ]);
   const [loading, setLoading] = useState<boolean>(false);

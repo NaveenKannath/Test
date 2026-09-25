@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   Zap, 
   Lock, 
@@ -81,13 +81,13 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 shadow-md shadow-blue-500/20 text-white mb-3">
             <Zap className="w-6 h-6 fill-white" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Nexyra</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Voltaris</h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             Autonomous AI Energy Forensics & Facility Intelligence
           </p>
           <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-[11px] font-mono text-emerald-700 mt-2">
             <Database className="w-3 h-3 text-emerald-600" />
-            <span>PostgreSQL nexyra3_db Authenticated</span>
+            <span>PostgreSQL voltaris3_db Authenticated</span>
           </div>
         </div>
 
@@ -241,7 +241,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => fillQuickCredentials('admin@nexyra.ai', 'admin123')}
+                onClick={() => fillQuickCredentials('admin@voltaris.ai', 'admin123')}
                 className="p-2 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 border border-slate-200/80 text-left transition-colors group"
               >
                 <div className="text-[11px] font-bold text-slate-800 group-hover:text-blue-700">Admin</div>
@@ -271,7 +271,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
 
         {/* Footer */}
         <p className="text-center text-[11px] text-slate-400 mt-6 font-mono">
-          Nexyra Energy Intelligence · ASHRAE Guideline 14 & IPMVP
+          Voltaris Energy Intelligence · ASHRAE Guideline 14 & IPMVP
         </p>
       </div>
     </div>

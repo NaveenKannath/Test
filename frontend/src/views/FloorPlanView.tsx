@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { 
   Building2, 
   AlertTriangle, 
@@ -515,7 +515,7 @@ export const FloorPlanView: React.FC<FloorPlanViewProps> = ({
                   <div>
                     <h3 className="text-base font-bold text-slate-900">No Floor Plan Uploaded Yet</h3>
                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                      This facility does not contain mock floor plans. Upload your own architectural blueprint or CAD layout and room dataset to let Nexyra AI Vision segment rooms and bind submeter telemetry.
+                      This facility does not contain mock floor plans. Upload your own architectural blueprint or CAD layout and room dataset to let Voltaris AI Vision segment rooms and bind submeter telemetry.
                     </p>
                   </div>
                   <button
@@ -951,7 +951,7 @@ export const FloorPlanView: React.FC<FloorPlanViewProps> = ({
                   <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin shrink-0"></div>
                   <div>
                     <p className="font-bold">{aiStep}</p>
-                    <p className="text-[11px] text-blue-600">Nexyra AI Vision Neural Spatial Segmenter</p>
+                    <p className="text-[11px] text-blue-600">Voltaris AI Vision Neural Spatial Segmenter</p>
                   </div>
                 </div>
               )}

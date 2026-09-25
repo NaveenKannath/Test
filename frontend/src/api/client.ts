@@ -1,4 +1,4 @@
-export const API_BASE = "http://localhost:8000/api/v1";
+﻿export const API_BASE = "http://localhost:8000/api/v1";
 
 export interface Building {
   id: string;
@@ -274,7 +274,7 @@ export interface AuthResponse {
   user: User;
 }
 
-export const AUTH_TOKEN_KEY = "nexyra_auth_token";
+export const AUTH_TOKEN_KEY = "voltaris_auth_token";
 
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
   const token = typeof window !== "undefined" ? localStorage.getItem(AUTH_TOKEN_KEY) : null;

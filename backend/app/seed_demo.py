@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 from pathlib import Path
 
 _backend_root = str(Path(__file__).resolve().parent.parent)
@@ -19,7 +19,7 @@ from app.models import (
 )
 
 def run_seed():
-    print("Initializing Nexyra database schema in PostgreSQL...")
+    print("Initializing Voltaris database schema in PostgreSQL...")
     Base.metadata.create_all(sync_engine)
     
     with get_sync_db() as db:
@@ -31,11 +31,11 @@ def run_seed():
             db.commit()
 
         print("Checking Organization & Users...")
-        org = db.query(Organization).filter_by(name="Nexyra Enterprise Facilities Group").first()
+        org = db.query(Organization).filter_by(name="Voltaris Enterprise Facilities Group").first()
         if not org:
             org = Organization(
                 id=str(uuid.uuid4()),
-                name="Nexyra Enterprise Facilities Group"
+                name="Voltaris Enterprise Facilities Group"
             )
             db.add(org)
             db.flush()
@@ -469,12 +469,12 @@ def run_seed():
                 step_order=4,
                 timestamp=datetime(2026, 9, 18, 22, 0, 0),
                 event_type="anomaly_flagged",
-                title="Nexyra Anomaly Triggered & Categorized",
+                title="Voltaris Anomaly Triggered & Categorized",
                 description="Contextual Forensics engine flagged 'After-Hours HVAC Operation' with 96% confidence score.",
                 metric_name="Excess Energy",
                 value=63.8,
                 expected_value=0.0,
-                evidence_reference="Nexyra Contextual Anomaly Engine"
+                evidence_reference="Voltaris Contextual Anomaly Engine"
             ),
             AutopsyEvent(
                 id=str(uuid.uuid4()),
@@ -644,7 +644,7 @@ def run_seed():
         db.add(sim1)
         
         db.commit()
-        print("Successfully seeded all TechNova Business Centre data into PostgreSQL nexyra3_db!")
+        print("Successfully seeded all TechNova Business Centre data into PostgreSQL voltaris3_db!")
 
 if __name__ == "__main__":
     run_seed()

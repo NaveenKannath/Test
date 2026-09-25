@@ -1,4 +1,4 @@
-import csv
+﻿import csv
 import io
 import json
 import uuid
@@ -322,7 +322,7 @@ class AIFloorPlanRecognizer:
         )
 
         fp_metadata = {
-            "detection_model": "Nexyra-Spatial-Vision-CAD-v3.2",
+            "detection_model": "Voltaris-Spatial-Vision-CAD-v3.2",
             "rooms_recognized": len(segmented),
             "confidence_score": 0.985,
             "has_custom_image": bool(image_data),

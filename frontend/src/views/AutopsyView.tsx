@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { 
   FileCheck2, 
   HelpCircle, 
@@ -311,10 +311,10 @@ export const AutopsyView: React.FC<AutopsyViewProps> = ({
           <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-200 text-xs max-w-2xl mx-auto">
             <div className="flex items-center space-x-2 text-blue-900 font-bold mb-2">
               <HelpCircle className="w-4 h-4 text-blue-600" />
-              <span>How Nexyra Distinguishes High Energy vs. Energy Waste</span>
+              <span>How Voltaris Distinguishes High Energy vs. Energy Waste</span>
             </div>
             <p className="text-blue-900/80 leading-relaxed text-xs">
-              Unlike simplistic rule engines that alarm whenever power is high, Nexyra's contextual baseline models correlate dry-bulb temperature, cooling degree days, and verified occupant density. High consumption during peak daytime heatwaves with verified occupancy is classified as <strong>legitimate cooling load</strong>, not waste.
+              Unlike simplistic rule engines that alarm whenever power is high, Voltaris's contextual baseline models correlate dry-bulb temperature, cooling degree days, and verified occupant density. High consumption during peak daytime heatwaves with verified occupancy is classified as <strong>legitimate cooling load</strong>, not waste.
             </p>
           </div>
         </div>
@@ -497,7 +497,7 @@ export const AutopsyView: React.FC<AutopsyViewProps> = ({
                 <span>"Why Wasn't This Flagged?" (High Weather vs. Waste)</span>
               </div>
               <p className="text-blue-900/80 leading-relaxed">
-                Nexyra distinguishes between <strong>HIGH ENERGY</strong> and <strong>ENERGY WASTE</strong>.
+                Voltaris distinguishes between <strong>HIGH ENERGY</strong> and <strong>ENERGY WASTE</strong>.
               </p>
               {Array.isArray(nonWasteExplanations) && nonWasteExplanations.length > 0 ? (
                 <div className="mt-2.5 p-3 rounded-xl bg-white border border-blue-200 space-y-1.5">

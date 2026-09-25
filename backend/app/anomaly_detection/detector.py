@@ -1,11 +1,11 @@
-import numpy as np
+﻿import numpy as np
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Tuple
 from app.analytics.baseline import ContextualBaselineEngine
 
 class ContextualAnomalyDetector:
     """
-    Nexyra Contextual Energy Forensics Engine.
+    Voltaris Contextual Energy Forensics Engine.
     Detects real energy waste while rejecting legitimate weather/occupancy-driven spikes.
     "Explain Every Watt."
     """
@@ -84,7 +84,7 @@ class ContextualAnomalyDetector:
                         "weather_normalized_demand": round(expected_kwh, 2)
                     },
                     "confidence_score": 0.94,
-                    "explanation": "Consumption was elevated (+32% above standard nominal baseline), but Nexyra's contextual models confirmed active tenant occupancy during an extreme outdoor heat wave. Chillers operated within nominal thermodynamic COP."
+                    "explanation": "Consumption was elevated (+32% above standard nominal baseline), but Voltaris's contextual models confirmed active tenant occupancy during an extreme outdoor heat wave. Chillers operated within nominal thermodynamic COP."
                 }
                 return False, None, legitimate_explanation
 

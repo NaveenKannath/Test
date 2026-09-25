@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Response
+﻿from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from typing import Dict, Any, List
@@ -113,20 +113,20 @@ async def download_pdf_report(building_id: str, db: AsyncSession = Depends(get_d
         
     pdf_content = (
         f"%PDF-1.4\n"
-        f"1 0 obj << /Title (Nexyra Forensic Audit Report - {bldg.name}) /Author (Nexyra AI Detective) >> endobj\n"
+        f"1 0 obj << /Title (Voltaris Forensic Audit Report - {bldg.name}) /Author (Voltaris AI Detective) >> endobj\n"
         f"2 0 obj << /Length 200 >> stream\n"
-        f"NEXYRA ENERGY FORENSICS AUDIT REPORT\n"
+        f"VOLTARIS ENERGY FORENSICS AUDIT REPORT\n"
         f"Facility: {bldg.name}\n"
         f"Area: {bldg.gross_floor_area_m2} m2\n"
         f"Status: Audited & Verified\n"
-        f"Audit Certified By: Nexyra Autonomous Energy Detective\n"
+        f"Audit Certified By: Voltaris Autonomous Energy Detective\n"
         f"endstream endobj\n"
         f"xref 0 3\n0000000000 65535 f\n0000000010 00000 n\n0000000120 00000 n\ntrailer << /Size 3 /Root 1 0 R >>\nstartxref 350\n%%EOF"
     )
     return Response(
         content=pdf_content.encode("utf-8"),
         media_type="application/pdf",
-        headers={"Content-Disposition": f"attachment; filename=Nexyra_Audit_Report_{building_id}.pdf"}
+        headers={"Content-Disposition": f"attachment; filename=Voltaris_Audit_Report_{building_id}.pdf"}
     )
 
 @router.get("/buildings/{building_id}/evaluation", response_model=EvaluationMetricsResponse)

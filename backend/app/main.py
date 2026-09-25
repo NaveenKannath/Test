@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 from pathlib import Path
 
 # Ensure backend root is in sys.path regardless of execution directory
@@ -36,7 +36,7 @@ from app.routers import (
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="Nexyra - Autonomous AI Commercial Building Energy Forensics Platform. 'Don't just monitor energy. Investigate it.'",
+    description="Voltaris - Autonomous AI Commercial Building Energy Forensics Platform. 'Don't just monitor energy. Investigate it.'",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/api/v1/openapi.json"
@@ -115,7 +115,7 @@ app.include_router(auth_router, prefix=api_v1_prefix)
 @app.get("/")
 async def root():
     return {
-        "service": "Nexyra AI Energy Detective API",
+        "service": "Voltaris AI Energy Detective API",
         "version": settings.APP_VERSION,
         "docs": "/docs",
         "api_v1": "/api/v1"

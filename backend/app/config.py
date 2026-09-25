@@ -1,4 +1,4 @@
-import os
+﻿import os
 from pydantic_settings import BaseSettings
 from pydantic import ConfigDict
 from typing import List
@@ -6,7 +6,7 @@ from typing import List
 class Settings(BaseSettings):
     model_config = ConfigDict(env_file=".env", extra="allow")
     
-    APP_NAME: str = "Nexyra - AI Energy Detective"
+    APP_NAME: str = "Voltaris - AI Energy Detective"
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = True
     ENVIRONMENT: str = "development"
@@ -14,11 +14,11 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL",
-        "postgresql+asyncpg://postgres:postgres@localhost:5432/nexyra3_db"
+        "postgresql+asyncpg://postgres:postgres@localhost:5432/voltaris3_db"
     )
     DATABASE_URL_SYNC: str = os.getenv(
         "DATABASE_URL_SYNC",
-        "postgresql+psycopg2://postgres:postgres@localhost:5432/nexyra3_db"
+        "postgresql+psycopg2://postgres:postgres@localhost:5432/voltaris3_db"
     )
     
     # CORS

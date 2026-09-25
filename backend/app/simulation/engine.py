@@ -1,9 +1,9 @@
-from typing import Dict, Any, List
+﻿from typing import Dict, Any, List
 import math
 
 class WhatIfSimulationEngine:
     """
-    Nexyra What-If Energy Savings Simulator.
+    Voltaris What-If Energy Savings Simulator.
     Simulates real-world energy conservation measures (ECMs) using thermodynamic
     and building physics models grounded in ASHRAE 90.1 / IPMVP Option C methodology.
     """

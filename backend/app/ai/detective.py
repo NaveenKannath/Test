@@ -1,4 +1,4 @@
-from typing import Dict, Any, List, Optional
+﻿from typing import Dict, Any, List, Optional
 import os
 import httpx
 from datetime import datetime
@@ -25,7 +25,7 @@ class AIEnergyDetective:
             try:
                 async with httpx.AsyncClient(timeout=20.0) as client:
                     system_prompt = (
-                        "You are Nexyra's Lead Energy Forensics Detective. "
+                        "You are Voltaris's Lead Energy Forensics Detective. "
                         "You investigate commercial building energy waste. "
                         "CRITICAL: Ground your responses strictly in the provided building context. "
                         "NEVER hallucinate or invent numbers, equipment, dates, or savings. "
@@ -116,7 +116,7 @@ class AIEnergyDetective:
         # Query 3: Weather vs Waste ("Was it weather or waste?")
         elif any(w in query_lower for w in ["weather", "heat", "legitimate", "why wasn't", "cooling"]):
             answer = (
-                "Nexyra distinguishes between high energy consumption and genuine energy waste. "
+                "Voltaris distinguishes between high energy consumption and genuine energy waste. "
                 "During high-temperature periods (>31°C outdoor ambient), building chiller load rose by 34%. "
                 "However, because tenant occupancy was verified at 82% and outdoor enthalpy required active cooling, "
                 "the contextual baseline adjusted upwards and classified this as legitimate thermodynamic load, NOT waste."

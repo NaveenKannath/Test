@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 import sys
 import os
 from fastapi.testclient import TestClient
@@ -15,7 +15,7 @@ def test_health_endpoint():
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "healthy"
-    assert "Nexyra" in data["service"]
+    assert "Voltaris" in data["service"]
 
 def test_list_buildings():
     resp = client.get("/api/v1/buildings")

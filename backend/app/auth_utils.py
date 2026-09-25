@@ -1,4 +1,4 @@
-import hashlib
+﻿import hashlib
 import secrets
 import hmac
 import time
@@ -7,7 +7,7 @@ import json
 from typing import Optional, Dict, Any
 from app.config import settings
 
-SECRET_KEY = getattr(settings, "SECRET_KEY", "nexyra_secret_auth_key_2026_super_secure")
+SECRET_KEY = getattr(settings, "SECRET_KEY", "voltaris_secret_auth_key_2026_super_secure")
 
 def hash_password(password: str) -> str:
     """Hash password using PBKDF2-HMAC-SHA256 with 100,000 rounds and random salt."""
