@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Building2, ChevronDown, Bell, Plus, Check, X, Trash2, Settings } from 'lucide-react';
-import type { Building } from '../api/client';
+import { Building2, ChevronDown, Bell, Plus, Check, X, Trash2, Settings, LogOut, User as UserIcon } from 'lucide-react';
+import type { Building, User } from '../api/client';
 
 interface TopHeaderProps {
   buildings: Building[];
@@ -21,6 +21,8 @@ interface TopHeaderProps {
   timeRange: string;
   setTimeRange: (range: string) => void;
   floorsCount?: number;
+  currentUser?: User | null;
+  onLogout?: () => void;
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({
@@ -31,9 +33,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   onDeleteBuilding,
   timeRange,
   setTimeRange,
-  floorsCount = 0
+  floorsCount = 0,
+  currentUser,
+  onLogout
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -211,8 +216,67 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-blue-500" />
         </button>
 
-        <div className="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 text-slate-600 font-bold text-[10px] flex items-center justify-center">
-          FM
+        {/* User Profile & Logout Dropdown */}
+        <div className="relative">
+          <button
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
+            className="flex items-center space-x-2 p-1 pl-2 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+          >
+            <span className="text-xs font-semibold text-slate-700 hidden md:inline truncate max-w-[120px]">
+              {currentUser?.full_name?.split(' ')[0] || 'User'}
+            </span>
+            <div className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 shadow-xs">
+              {currentUser?.full_name
+                ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+                : 'NX'}
+            </div>
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+          </button>
+
+          {userMenuOpen && (
+            <>
+              <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
+              <div className="absolute right-0 top-full mt-2 w-64 rounded-2xl bg-white border border-slate-200 shadow-xl z-50 p-3 space-y-3">
+                <div className="flex items-center space-x-3 pb-3 border-b border-slate-100">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-xs">
+                    {currentUser?.full_name
+                      ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()
+                      : 'NX'}
+                  </div>
+                  <div className="overflow-hidden min-w-0">
+                    <p className="text-xs font-bold text-slate-900 truncate">{currentUser?.full_name || 'Nexyra User'}</p>
+                    <p className="text-[10px] text-slate-400 truncate">{currentUser?.email || 'admin@nexyra.ai'}</p>
+                    <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-100">
+                      {currentUser?.role?.replace('_', ' ') || 'Auditor'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="px-2 py-1 text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
+                    Database Authority
+                  </div>
+                  <div className="px-2 py-1.5 text-xs text-slate-600 font-mono flex items-center justify-between rounded-lg bg-slate-50">
+                    <span>Database:</span>
+                    <span className="text-emerald-700 font-semibold">nexyra3_db</span>
+                  </div>
+                </div>
+
+                {onLogout && (
+                  <button
+                    onClick={() => {
+                      setUserMenuOpen(false);
+                      onLogout();
+                    }}
+                    className="w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold text-xs transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Sign Out</span>
+                  </button>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </div>
 

@@ -10,12 +10,16 @@ import {
   FileBarChart,
   ChevronRight,
   ChevronLeft,
-  Activity
+  Activity,
+  LogOut
 } from 'lucide-react';
+import type { User } from '../api/client';
 
 interface SidebarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  currentUser?: User | null;
+  onLogout?: () => void;
 }
 
 const NAV_ITEMS = [
@@ -43,7 +47,12 @@ const NAV_ITEMS = [
   },
 ];
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ 
+  activeTab, 
+  setActiveTab,
+  currentUser,
+  onLogout 
+}) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
@@ -122,18 +131,38 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
         </div>
       )}
 
-      {/* Footer */}
-      <div className={`border-t border-slate-100 p-2 ${collapsed ? 'flex justify-center' : ''}`}>
-        {!collapsed && (
-          <div className="flex items-center space-x-2.5 px-2 py-2 mb-2">
-            <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-[10px] flex items-center justify-center shrink-0">
-              FM
+      {/* Footer / User Profile & Logout */}
+      <div className={`border-t border-slate-100 p-2 ${collapsed ? 'flex flex-col items-center' : ''}`}>
+        {!collapsed && currentUser && (
+          <div className="flex items-center justify-between px-2 py-2 mb-1.5 rounded-lg bg-slate-50/70 border border-slate-100">
+            <div className="flex items-center space-x-2 min-w-0">
+              <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 shadow-xs">
+                {currentUser.full_name ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : 'NX'}
+              </div>
+              <div className="overflow-hidden min-w-0">
+                <p className="text-xs font-semibold text-slate-800 truncate leading-none">{currentUser.full_name}</p>
+                <p className="text-[9px] text-blue-600 font-semibold uppercase tracking-wider mt-0.5">{currentUser.role.replace('_', ' ')}</p>
+              </div>
             </div>
-            <div className="overflow-hidden">
-              <p className="text-xs font-semibold text-slate-800 truncate leading-none">Facility Manager</p>
-              <p className="text-[9px] text-slate-400 mt-0.5">Operations Director</p>
-            </div>
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                title="Sign Out"
+                className="p-1 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            )}
           </div>
+        )}
+        {collapsed && currentUser && onLogout && (
+          <button
+            onClick={onLogout}
+            title="Sign Out"
+            className="p-2 mb-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+          >
+            <LogOut className="w-4 h-4" />
+          </button>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}

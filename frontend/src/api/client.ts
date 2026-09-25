@@ -259,8 +259,31 @@ export interface AIDetectiveAnswer {
   suggested_follow_ups: string[];
 }
 
+export interface User {
+  id: string;
+  email: string;
+  full_name: string;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AuthResponse {
+  access_token: string;
+  token_type: string;
+  user: User;
+}
+
+export const AUTH_TOKEN_KEY = "nexyra_auth_token";
+
 async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(url, init);
+  const token = typeof window !== "undefined" ? localStorage.getItem(AUTH_TOKEN_KEY) : null;
+  const headers = new Headers(init?.headers || {});
+  if (token && !headers.has("Authorization")) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  const res = await fetch(url, { ...init, headers });
   if (!res.ok) {
     let msg = `HTTP ${res.status}`;
     try {
@@ -274,6 +297,43 @@ async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  async login(payload: { email: string; password: string }): Promise<AuthResponse> {
+    const data = await fetchJson<AuthResponse>(`${API_BASE}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (data.access_token && typeof window !== "undefined") {
+      localStorage.setItem(AUTH_TOKEN_KEY, data.access_token);
+    }
+    return data;
+  },
+
+  async register(payload: { email: string; password: string; full_name: string; role?: string }): Promise<AuthResponse> {
+    const data = await fetchJson<AuthResponse>(`${API_BASE}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (data.access_token && typeof window !== "undefined") {
+      localStorage.setItem(AUTH_TOKEN_KEY, data.access_token);
+    }
+    return data;
+  },
+
+  async getMe(): Promise<User> {
+    return fetchJson<User>(`${API_BASE}/auth/me`);
+  },
+
+  async logout(): Promise<void> {
+    try {
+      await fetchJson(`${API_BASE}/auth/logout`, { method: "POST" });
+    } catch {}
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+    }
+  },
+
   async getBuildings(): Promise<Building[]> {
     return fetchJson<Building[]>(`${API_BASE}/buildings`);
   },

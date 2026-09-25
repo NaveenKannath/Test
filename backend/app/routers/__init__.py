@@ -13,6 +13,7 @@ from app.routers.ai import router as ai_router
 from app.routers.reports import router as reports_router
 from app.routers.hvac import router as hvac_router
 from app.routers.datasets import router as datasets_router
+from app.routers.auth import router as auth_router
 
 __all__ = [
     "health_router",
@@ -29,5 +30,7 @@ __all__ = [
     "ai_router",
     "reports_router",
     "hvac_router",
-    "datasets_router"
+    "datasets_router",
+    "auth_router"
 ]
+

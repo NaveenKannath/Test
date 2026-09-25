@@ -27,8 +27,10 @@ class User(Base):
     id = Column(String(36), primary_key=True, default=generate_uuid)
     organization_id = Column(String(36), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=True)
     email = Column(String(255), unique=True, nullable=False)
+    hashed_password = Column(String(255), nullable=True)
     full_name = Column(String(255), nullable=False)
     role = Column(String(50), default="auditor")  # admin, auditor, facility_manager, viewer
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 

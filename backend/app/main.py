@@ -29,7 +29,8 @@ from app.routers import (
     ai_router,
     reports_router,
     hvac_router,
-    datasets_router
+    datasets_router,
+    auth_router
 )
 
 app = FastAPI(
@@ -109,6 +110,7 @@ app.include_router(ai_router, prefix=api_v1_prefix)
 app.include_router(reports_router, prefix=api_v1_prefix)
 app.include_router(hvac_router, prefix=api_v1_prefix)
 app.include_router(datasets_router, prefix=api_v1_prefix)
+app.include_router(auth_router, prefix=api_v1_prefix)
 
 @app.get("/")
 async def root():

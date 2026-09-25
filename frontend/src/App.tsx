@@ -8,17 +8,21 @@ import { SimulatorView } from './views/SimulatorView';
 import { InterventionsView } from './views/InterventionsView';
 import { AIDetectiveView } from './views/AIDetectiveView';
 import { AuditReportView } from './views/AuditReportView';
+import { LoginView } from './views/LoginView';
 import type { 
   Building, 
   Floor, 
   EnergySummary, 
   HealthScore, 
   TimeseriesPoint, 
-  AnomalyItem
+  AnomalyItem,
+  User
 } from './api/client';
 import { api } from './api/client';
 
 export const App: React.FC = () => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [authChecking, setAuthChecking] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>('dashboard');
   const [timeRange, setTimeRange] = useState<string>('7 Days');
   const [buildings, setBuildings] = useState<Building[]>([]);
@@ -59,8 +63,34 @@ export const App: React.FC = () => {
     }
   };
 
+  // Verify existing auth token on mount
   useEffect(() => {
     let isMounted = true;
+    async function checkAuth() {
+      try {
+        const token = localStorage.getItem('nexyra_auth_token');
+        if (token) {
+          const user = await api.getMe();
+          if (isMounted) {
+            setCurrentUser(user);
+          }
+        }
+      } catch (err) {
+        console.warn('Authentication token invalid or expired:', err);
+        localStorage.removeItem('nexyra_auth_token');
+      } finally {
+        if (isMounted) setAuthChecking(false);
+      }
+    }
+    checkAuth();
+    return () => { isMounted = false; };
+  }, []);
+
+  // When user is authenticated, load facilities
+  useEffect(() => {
+    let isMounted = true;
+    if (!currentUser) return;
+
     async function init() {
       try {
         const bldgs = await api.getBuildings();
@@ -70,7 +100,7 @@ export const App: React.FC = () => {
           setCurrentBuildingId(initialBldgId);
           await loadBuildingData(initialBldgId);
         } else {
-          setError('Could not reach Nexyra Backend at http://localhost:8000. Please ensure the backend is running.');
+          setError(null);
         }
       } catch (err) {
         console.error('Failed to list buildings:', err);
@@ -79,7 +109,18 @@ export const App: React.FC = () => {
     }
     init();
     return () => { isMounted = false; };
-  }, []);
+  }, [currentUser]);
+
+  const handleLogout = async () => {
+    await api.logout();
+    setCurrentUser(null);
+    setBuilding(null);
+    setFloors([]);
+    setSummary(null);
+    setHealth(null);
+    setTimeseries([]);
+    setAnomalies([]);
+  };
 
   const handleSelectBuilding = async (bId: string) => {
     setCurrentBuildingId(bId);
@@ -141,10 +182,28 @@ export const App: React.FC = () => {
     setActiveTab('autopsy');
   };
 
+  if (authChecking) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4">
+        <div className="w-10 h-10 border-3 border-blue-600 border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p className="text-xs font-semibold text-slate-600 font-mono">Authenticating with PostgreSQL nexyra3_db...</p>
+      </div>
+    );
+  }
+
+  if (!currentUser) {
+    return <LoginView onLoginSuccess={(user) => setCurrentUser(user)} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex">
       {/* Sidebar Navigation */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        currentUser={currentUser}
+        onLogout={handleLogout}
+      />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
@@ -158,6 +217,8 @@ export const App: React.FC = () => {
           timeRange={timeRange} 
           setTimeRange={setTimeRange}
           floorsCount={floors.length}
+          currentUser={currentUser}
+          onLogout={handleLogout}
         />
 
         {/* View Content */}

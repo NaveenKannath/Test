@@ -540,3 +540,28 @@ class AuditReportResponse(BaseSchema):
     verified_interventions: List[Dict[str, Any]]
     data_quality_summary: str
     confidence_assessment: str
+
+# ==================== Authentication & Users ====================
+class UserLoginRequest(BaseModel):
+    email: str
+    password: str
+
+class UserRegisterRequest(BaseModel):
+    email: str
+    password: str
+    full_name: str
+    role: Optional[str] = "auditor"
+    organization_id: Optional[str] = None
+
+class UserResponse(BaseSchema):
+    id: str
+    email: str
+    full_name: str
+    role: str
+    is_active: bool = True
+    created_at: datetime
+
+class AuthTokenResponse(BaseSchema):
+    access_token: str
+    token_type: str = "bearer"
+    user: UserResponse
