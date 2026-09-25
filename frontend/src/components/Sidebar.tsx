@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Zap,
   LayoutDashboard,
@@ -140,7 +140,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {currentUser.full_name ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : 'VA'}
               </div>
               <div className="overflow-hidden min-w-0">
-                <p className="text-xs font-semibold text-slate-800 truncate leading-none">{currentUser.full_name}</p>
+                <p className="text-xs font-semibold text-slate-800 truncate leading-none">{currentUser.full_name.replace('Voltaris', 'Ecovolt')}</p>
                 <p className="text-[9px] text-blue-600 font-semibold uppercase tracking-wider mt-0.5">{currentUser.role.replace('_', ' ')}</p>
               </div>
             </div>

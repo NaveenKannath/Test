@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Building2, ChevronDown, Bell, Plus, Check, X, Trash2, Settings, LogOut, User as UserIcon } from 'lucide-react';
 import type { Building, User } from '../api/client';
 
@@ -244,7 +244,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                       : 'NX'}
                   </div>
                   <div className="overflow-hidden min-w-0">
-                    <p className="text-xs font-bold text-slate-900 truncate">{currentUser?.full_name || 'ECO ⚡ VOLT User'}</p>
+                    <p className="text-xs font-bold text-slate-900 truncate">{(currentUser?.full_name || 'Ecovolt User').replace('Voltaris', 'Ecovolt')}</p>
                     <p className="text-[10px] text-slate-400 truncate">{currentUser?.email || 'admin@voltaris.ai'}</p>
                     <span className="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-100">
                       {currentUser?.role?.replace('_', ' ') || 'Auditor'}
