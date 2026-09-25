@@ -223,7 +223,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
             className="flex items-center space-x-2 p-1 pl-2 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
           >
             <span className="text-xs font-semibold text-slate-700 hidden md:inline truncate max-w-[120px]">
-              {currentUser?.full_name?.split(' ')[0] || 'User'}
+              {(currentUser?.full_name || 'User').replace('Voltaris', 'Ecovolt').split(' ')[0]}
             </span>
             <div className="w-7 h-7 rounded-lg bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 shadow-xs">
               {currentUser?.full_name
