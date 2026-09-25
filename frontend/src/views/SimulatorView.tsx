@@ -102,11 +102,13 @@ export const SimulatorView: React.FC<SimulatorViewProps> = ({ buildingId, onNavi
 
               {/* Slider 1: Runtime Hours */}
               {scenarioType === 'hvac_runtime_reduction' && (
-                <div className="space-y-2 p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="space-y-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80">
+                  {/* Label + value */}
                   <div className="flex justify-between text-xs">
-                    <span className="text-slate-700 font-medium">Daily Runtime Reduction:</span>
-                    <span className="font-mono font-bold text-blue-600">{runtimeHours} Hours / Day</span>
+                    <span className="text-slate-700 font-medium">Hours to Cut Per Day:</span>
+                    <span className="font-mono font-bold text-blue-600">−{runtimeHours}h / day</span>
                   </div>
+
                   <input
                     type="range"
                     min="0.5"
@@ -116,11 +118,26 @@ export const SimulatorView: React.FC<SimulatorViewProps> = ({ buildingId, onNavi
                     onChange={(e) => setRuntimeHours(parseFloat(e.target.value))}
                     className="w-full accent-blue-600 cursor-pointer"
                   />
-                  <div className="flex justify-between text-[10px] text-slate-400 font-mono">
-                    <span>0.5h (Mild)</span>
-                    <span>2.0h (Recommended)</span>
-                    <span>4.0h (Aggressive)</span>
+
+                  {/* Before / After runtime strip */}
+                  <div className="grid grid-cols-3 gap-1.5 text-center">
+                    <div className="p-1.5 rounded-lg bg-slate-200/70">
+                      <div className="text-[9px] text-slate-500 uppercase font-semibold">Baseline</div>
+                      <div className="text-sm font-bold font-mono text-slate-700">12h/day</div>
+                    </div>
+                    <div className="p-1.5 rounded-lg bg-red-50 border border-red-200">
+                      <div className="text-[9px] text-red-500 uppercase font-semibold">Cut</div>
+                      <div className="text-sm font-bold font-mono text-red-600">−{runtimeHours}h</div>
+                    </div>
+                    <div className="p-1.5 rounded-lg bg-emerald-50 border border-emerald-200">
+                      <div className="text-[9px] text-emerald-600 uppercase font-semibold">New Runtime</div>
+                      <div className="text-sm font-bold font-mono text-emerald-700">{(12 - runtimeHours).toFixed(1)}h/day</div>
+                    </div>
                   </div>
+
+                  <p className="text-[10px] text-slate-400 leading-snug">
+                    ↑ Cutting more hours = HVAC runs less = more energy saved. Cutting −4h saves ~8× more than −0.5h.
+                  </p>
                 </div>
               )}
 

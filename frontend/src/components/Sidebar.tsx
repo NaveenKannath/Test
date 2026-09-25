@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Zap,
   LayoutDashboard,
@@ -137,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex items-center justify-between px-2 py-2 mb-1.5 rounded-lg bg-slate-50/70 border border-slate-100">
             <div className="flex items-center space-x-2 min-w-0">
               <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-bold text-[10px] flex items-center justify-center shrink-0 shadow-xs">
-                {currentUser.full_name ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : 'NX'}
+                {currentUser.full_name ? currentUser.full_name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase() : 'VA'}
               </div>
               <div className="overflow-hidden min-w-0">
                 <p className="text-xs font-semibold text-slate-800 truncate leading-none">{currentUser.full_name}</p>
