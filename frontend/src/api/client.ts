@@ -259,65 +259,67 @@ export interface AIDetectiveAnswer {
   suggested_follow_ups: string[];
 }
 
+async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(url, init);
+  if (!res.ok) {
+    let msg = `HTTP ${res.status}`;
+    try {
+      const err = await res.json();
+      if (err.detail) msg = typeof err.detail === "string" ? err.detail : JSON.stringify(err.detail);
+      else if (err.message) msg = err.message;
+    } catch {}
+    throw new Error(msg);
+  }
+  return res.json();
+}
+
 export const api = {
   async getBuildings(): Promise<Building[]> {
-    const res = await fetch(`${API_BASE}/buildings`);
-    return res.json();
+    return fetchJson<Building[]>(`${API_BASE}/buildings`);
   },
   
   async getBuilding(id: string): Promise<Building> {
-    const res = await fetch(`${API_BASE}/buildings/${id}`);
-    return res.json();
+    return fetchJson<Building>(`${API_BASE}/buildings/${id}`);
   },
   
   async getFloors(buildingId: string): Promise<Floor[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/floors`);
-    return res.json();
+    return fetchJson<Floor[]>(`${API_BASE}/buildings/${buildingId}/floors`);
   },
   
   async getFloorZoneStates(floorId: string): Promise<ZoneState[]> {
-    const res = await fetch(`${API_BASE}/floors/${floorId}/zones/states`);
-    return res.json();
+    return fetchJson<ZoneState[]>(`${API_BASE}/floors/${floorId}/zones/states`);
   },
   
   async getEnergySummary(buildingId: string): Promise<EnergySummary> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/energy/summary`);
-    return res.json();
+    return fetchJson<EnergySummary>(`${API_BASE}/buildings/${buildingId}/energy/summary`);
   },
   
   async getEnergyTimeseries(buildingId: string, limit: number = 72): Promise<TimeseriesPoint[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/energy?limit=${limit}`);
-    return res.json();
+    return fetchJson<TimeseriesPoint[]>(`${API_BASE}/buildings/${buildingId}/energy?limit=${limit}`);
   },
   
   async getHealthScore(buildingId: string): Promise<HealthScore> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/energy/health`);
-    return res.json();
+    return fetchJson<HealthScore>(`${API_BASE}/buildings/${buildingId}/energy/health`);
   },
   
   async getAnomalies(buildingId: string): Promise<AnomalyItem[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/anomalies`);
-    return res.json();
+    return fetchJson<AnomalyItem[]>(`${API_BASE}/buildings/${buildingId}/anomalies`);
   },
   
   async getAnomalyEvidence(anomalyId: string): Promise<EvidenceCard> {
-    const res = await fetch(`${API_BASE}/anomalies/${anomalyId}/evidence`);
-    return res.json();
+    return fetchJson<EvidenceCard>(`${API_BASE}/anomalies/${anomalyId}/evidence`);
   },
   
   async getAnomalyAutopsy(anomalyId: string): Promise<AutopsyTimeline> {
-    const res = await fetch(`${API_BASE}/anomalies/${anomalyId}/autopsy`);
-    return res.json();
+    return fetchJson<AutopsyTimeline>(`${API_BASE}/anomalies/${anomalyId}/autopsy`);
   },
   
   async getNonWasteExplanations(buildingId: string): Promise<any[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/non-waste-explanations`);
-    return res.json();
+    return fetchJson<any[]>(`${API_BASE}/buildings/${buildingId}/non-waste-explanations`);
   },
   
   async getRecommendations(buildingId: string): Promise<RecommendationItem[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/recommendations`);
-    return res.json();
+    return fetchJson<RecommendationItem[]>(`${API_BASE}/buildings/${buildingId}/recommendations`);
   },
   
   async runSimulation(payload: {
@@ -328,45 +330,39 @@ export const api = {
     equipment_efficiency_improvement_pct?: number;
     schedule_compliance_pct?: number;
   }): Promise<SimulationResult> {
-    const res = await fetch(`${API_BASE}/simulations`, {
+    return fetchJson<SimulationResult>(`${API_BASE}/simulations`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     });
-    return res.json();
   },
   
   async getInterventions(buildingId: string): Promise<InterventionItem[]> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/interventions`);
-    return res.json();
+    return fetchJson<InterventionItem[]>(`${API_BASE}/buildings/${buildingId}/interventions`);
   },
   
   async verifyIntervention(interventionId: string): Promise<VerificationData> {
-    const res = await fetch(`${API_BASE}/interventions/${interventionId}/verify`, {
+    return fetchJson<VerificationData>(`${API_BASE}/interventions/${interventionId}/verify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({})
     });
-    return res.json();
   },
   
   async askAIDetective(buildingId: string, query: string): Promise<AIDetectiveAnswer> {
-    const res = await fetch(`${API_BASE}/ai/chat`, {
+    return fetchJson<AIDetectiveAnswer>(`${API_BASE}/ai/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ building_id: buildingId, query })
     });
-    return res.json();
   },
   
   async getEvaluation(buildingId: string): Promise<any> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/evaluation`);
-    return res.json();
+    return fetchJson<any>(`${API_BASE}/buildings/${buildingId}/evaluation`);
   },
   
   async getAuditReport(buildingId: string): Promise<any> {
-    const res = await fetch(`${API_BASE}/buildings/${buildingId}/report`);
-    return res.json();
+    return fetchJson<any>(`${API_BASE}/buildings/${buildingId}/report`);
   },
 
   async recognizeFloorPlan(payload: {

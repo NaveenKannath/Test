@@ -198,6 +198,8 @@ export const App: React.FC = () => {
 
               {activeTab === 'autopsy' && (
                 <AutopsyView
+                  buildingId={currentBuildingId}
+                  buildingName={building?.name}
                   anomalies={anomalies}
                   selectedAnomalyId={selectedAnomalyId}
                   onSelectAnomaly={setSelectedAnomalyId}
