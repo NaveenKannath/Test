@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import {
   Zap,
   LayoutDashboard,
@@ -66,7 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
         {!collapsed && (
           <div>
-            <p className="text-sm font-bold text-slate-900 leading-none">Voltaris</p>
+            <p className="text-sm font-bold text-slate-900 leading-none">ECO ⚡ VOLT</p>
             <p className="text-[10px] text-slate-400 mt-0.5 font-medium">Energy Detective</p>
           </div>
         )}

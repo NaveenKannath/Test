@@ -59,7 +59,7 @@ export const App: React.FC = () => {
       setError(null);
     } catch (err: any) {
       console.error("Failed to load facility data:", err);
-      setError("Could not reach Voltaris Backend at http://localhost:8000. Please ensure the backend is running.");
+      setError("Could not reach ECO ⚡ VOLT Backend at http://localhost:8000. Please ensure the backend is running.");
     }
   };
 
@@ -104,7 +104,7 @@ export const App: React.FC = () => {
         }
       } catch (err) {
         console.error('Failed to list buildings:', err);
-        setError('Could not reach Voltaris Backend at http://localhost:8000. Please ensure the backend is running.');
+        setError('Could not reach ECO ⚡ VOLT Backend at http://localhost:8000. Please ensure the backend is running.');
       }
     }
     init();
@@ -301,7 +301,7 @@ export const App: React.FC = () => {
         <footer className="border-t border-slate-200 bg-white py-2.5 px-6 text-[11px] text-slate-400 flex items-center justify-between font-mono">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span className="font-semibold text-slate-600">Voltaris v1.0</span>
+            <span className="font-semibold text-slate-600">ECO ⚡ VOLT v1.0</span>
             <span>·</span>
             <span>voltaris3_db</span>
           </div>

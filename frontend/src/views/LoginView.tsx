@@ -81,7 +81,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 shadow-md shadow-blue-500/20 text-white mb-3">
             <Zap className="w-6 h-6 fill-white" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Voltaris</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">ECO ⚡ VOLT</h1>
           <p className="text-xs text-slate-500 font-medium mt-0.5">
             Autonomous AI Energy Forensics & Facility Intelligence
           </p>
@@ -271,7 +271,7 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
 
         {/* Footer */}
         <p className="text-center text-[11px] text-slate-400 mt-6 font-mono">
-          Voltaris Energy Intelligence · ASHRAE Guideline 14 & IPMVP
+          ECO ⚡ VOLT Energy Intelligence · ASHRAE Guideline 14 & IPMVP
         </p>
       </div>
     </div>
